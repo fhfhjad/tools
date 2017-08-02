@@ -1,6 +1,5 @@
 package com.dewly.util;
 
-import java.lang.reflect.Array;
 import java.util.AbstractCollection;
 import java.util.AbstractMap;
 import java.util.ArrayList;
@@ -27,7 +26,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.dewly.collection.EnumerationIterator;
 import com.dewly.collection.IteratorEnumeration;
-import com.dewly.convert.Convert;
 import com.dewly.exceptions.UtilException;
 import com.dewly.lang.BoundedPriorityQueue;
 import com.dewly.lang.Editor;
@@ -36,7 +34,7 @@ import com.dewly.lang.Matcher;
 /**
  * 集合相关工具类，包括数组
  * 
- * @author xiaoleilu
+ * @author dewly
  * 
  */
 public class CollectionUtil {
@@ -66,7 +64,7 @@ public class CollectionUtil {
 			final Map<T, Integer> map2 = countMap(coll2);
 			final Set<T> elts = newHashSet(coll2);
 			for (T t : elts) {
-				for (int i = 0, m = Math.max(Integer.parseInt(map1.get(t).toString()), Integer.parseInt(map2.get(t).toString())); i < m; i++) {
+				for (int i = 0, m = Math.max(map1.get(t)!=null?map1.get(t):0, map2.get(t)!=null?map2.get(t):0); i < m; i++) {
 					list.add(t);
 				}
 			}
@@ -113,7 +111,7 @@ public class CollectionUtil {
 			final Map<T, Integer> map2 = countMap(coll2);
 			final Set<T> elts = newHashSet(coll2);
 			for (T t : elts) {
-				for (int i = 0, m = Math.min(Integer.parseInt(map1.get(t).toString()), Integer.parseInt(map2.get(t).toString())); i < m; i++) {
+				for (int i = 0, m = Math.min(map1.get(t)!=null?map1.get(t):0, map2.get(t)!=null?map2.get(t):0); i < m; i++) {
 					list.add(t);
 				}
 			}
@@ -166,7 +164,7 @@ public class CollectionUtil {
 			final Map<T, Integer> map2 = countMap(coll2);
 			final Set<T> elts = newHashSet(coll2);
 			for (T t : elts) {
-				for (int i = 0, m = Math.max(Integer.parseInt(map1.get(t).toString()), Integer.parseInt(map2.get(t).toString())) - Math.min(Integer.parseInt(map1.get(t).toString()), Integer.parseInt(map2.get(t).toString())); i < m; i++) {
+				for (int i = 0, m = Math.max(map1.get(t)!=null?map1.get(t):0, map2.get(t)!=null?map2.get(t):0) - Math.min(map1.get(t)!=null?map1.get(t):0, map2.get(t)!=null?map2.get(t):0); i < m; i++) {
 					list.add(t);
 				}
 			}
@@ -180,7 +178,6 @@ public class CollectionUtil {
 	 * @param coll1 集合1
 	 * @param coll2 集合2
 	 * @return 其中一个集合在另一个集合中是否至少包含一个元素
-	 * @since 2.1
 	 * @see #intersection
 	 */
 	public static boolean containsAny(final Collection<?> coll1, final Collection<?> coll2) {
@@ -216,7 +213,7 @@ public class CollectionUtil {
 	 * @return {@link Map}
 	 */
 	public static <T> Map<T, Integer> countMap(Collection<T> collection) {
-		HashMap<T, Integer> countMap = new HashMap<>();
+		Map<T, Integer> countMap = new HashMap<>();
 		Integer count;
 		for (T t : collection) {
 			count = countMap.get(t);
@@ -357,7 +354,6 @@ public class CollectionUtil {
 	 * @param size 初始大小，由于默认负载因子0.75，传入的size会实际初始大小为size / 0.75
 	 * @param isOrder Map的Key是否有序，有序返回 {@link LinkedHashMap}，否则返回 {@link HashMap}
 	 * @return HashMap对象
-	 * @since 3.0.4
 	 */
 	public static <K, V> HashMap<K, V> newHashMap(int size, boolean isOrder) {
 		int initialCapacity = (int) (size / 0.75);
@@ -440,7 +436,6 @@ public class CollectionUtil {
 	 * @param isSorted 是否有序，有序返回 {@link LinkedHashSet}，否则返回{@link HashSet}
 	 * @param iter {@link Iterator}
 	 * @return HashSet对象
-	 * @since 3.0.8
 	 */
 	public static <T> HashSet<T> newHashSet(boolean isSorted, Iterator<T> iter) {
 		if (null == iter) {
@@ -460,7 +455,6 @@ public class CollectionUtil {
 	 * @param isSorted 是否有序，有序返回 {@link LinkedHashSet}，否则返回{@link HashSet}
 	 * @param enumration {@link Enumeration}
 	 * @return HashSet对象
-	 * @since 3.0.8
 	 */
 	public static <T> HashSet<T> newHashSet(boolean isSorted, Enumeration<T> enumration) {
 		if (null == enumration) {
@@ -513,7 +507,6 @@ public class CollectionUtil {
 	 * @param <T> 集合元素类型
 	 * @param iter {@link Iterator}
 	 * @return ArrayList对象
-	 * @since 3.0.8
 	 */
 	public static <T> ArrayList<T> newArrayList(Iterator<T> iter) {
 		final ArrayList<T> list = new ArrayList<>();
@@ -532,7 +525,6 @@ public class CollectionUtil {
 	 * @param <T> 集合元素类型
 	 * @param enumration {@link Enumeration}
 	 * @return ArrayList对象
-	 * @since 3.0.8
 	 */
 	public static <T> ArrayList<T> newArrayList(Enumeration<T> enumration) {
 		final ArrayList<T> list = new ArrayList<>();
@@ -562,7 +554,6 @@ public class CollectionUtil {
 	 * @param <T> 集合类型
 	 * @param collectionType 集合类型
 	 * @return 集合类型对应的实例
-	 * @since 3.0.8
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static <T> Collection<T> create(Class<?> collectionType) {
@@ -708,7 +699,7 @@ public class CollectionUtil {
 	public static <T> List<List<T>> split(Collection<T> collection, int size) {
 		final List<List<T>> result = new ArrayList<>();
 
-		ArrayList<T> subList = new ArrayList<>(size);
+		List<T> subList = new ArrayList<>(size);
 		for (T t : collection) {
 			if (subList.size() > size) {
 				result.add(subList);
@@ -892,7 +883,6 @@ public class CollectionUtil {
 	 * 
 	 * @param iterable 被检查的Iterable对象
 	 * @return 是否包含{@code null}元素
-	 * @since 3.0.7
 	 */
 	public static boolean hasNull(Iterable<?> iterable) {
 		if (isNotEmpty(iterable)) {
@@ -920,7 +910,6 @@ public class CollectionUtil {
 	 * @param delimiter 分隔符
 	 * @param isOrder 是否有序
 	 * @return Map
-	 * @since 3.0.4
 	 */
 	public static Map<String, String> zip(String keys, String values, String delimiter, boolean isOrder) {
 		return ArrayUtil.zip(StrUtil.split(keys, delimiter), StrUtil.split(values, delimiter), isOrder);
@@ -955,7 +944,7 @@ public class CollectionUtil {
 	 * @param <V> 值类型
 	 * @param keys 键列表
 	 * @param values 值列表
-	 * @return Map
+	 * @return {@link Map}
 	 */
 	public static <K, V> Map<K, V> zip(Collection<K> keys, Collection<V> values) {
 		if (isEmpty(keys) || isEmpty(values)) {
@@ -1013,7 +1002,6 @@ public class CollectionUtil {
 	 * 
 	 * @param array 数组。元素类型为Map.Entry、数组、Iterable、Iterator
 	 * @return {@link HashMap}
-	 * @since 3.0.8
 	 */
 	@SuppressWarnings("rawtypes")
 	public static HashMap<Object, Object> toMap(Object[] array) {
@@ -1120,46 +1108,11 @@ public class CollectionUtil {
 	 * 
 	 * @param iterable {@link Iterable}
 	 * @return {@link Collection} 或者 {@link ArrayList}
-	 * @since 3.0.9
 	 */
 	public static <E> Collection<E> toCollection(Iterable<E> iterable) {
 		return (iterable instanceof Collection) ? (Collection<E>) iterable : newArrayList(iterable.iterator());
 	}
 
-	/**
-	 * 将指定对象全部加入到集合中<br>
-	 * 提供的对象如果为集合类型，会自动转换为目标元素类型<br>
-	 * 
-	 * @param <T> 元素类型
-	 * @param collection 被加入的集合
-	 * @param value 对象，可能为Iterator、Iterable、Enumeration、Array
-	 * @return 被加入集合
-	 */
-//	public static <T> Collection<T> addAll(Collection<T> collection, Object value) {
-//		return addAll(collection, value, ClassUtil.getTypeArgument(collection.getClass()));
-//	}
-
-	/**
-	 * 将指定对象全部加入到集合中<br>
-	 * 提供的对象如果为集合类型，会自动转换为目标元素类型<br>
-	 * 
-	 * @param <T> 元素类型
-	 * @param collection 被加入的集合
-	 * @param value 对象，可能为Iterator、Iterable、Enumeration、Array
-	 * @param elementType 元素类型，为空时，使用Object类型来接纳所有类型
-	 * @return 被加入集合
-	 */
-//	@SuppressWarnings({ "unchecked", "rawtypes" })
-//	public static <T> Collection<T> addAll(Collection<T> collection, Object value, Class<?> elementType) {
-//		if (null == collection || null == value) {
-//			return collection;
-//		}
-//		if (null == elementType) {// 元素类型为空时，使用Object类型来接纳所有类型
-//			elementType = Object.class;
-//		}
-//
-//		return collection;
-//	}
 
 	/**
 	 * 加入全部
@@ -1214,7 +1167,6 @@ public class CollectionUtil {
 	 * @param collection 被加入的集合 {@link Collection}
 	 * @param values 要加入的内容数组
 	 * @return 原集合
-	 * @since 3.0.8
 	 */
 	public static <T> Collection<T> addAll(Collection<T> collection, T[] values) {
 		if (null != collection && null != values) {
@@ -1248,7 +1200,6 @@ public class CollectionUtil {
 	 * @param <T> 集合元素类型
 	 * @param iterable {@link Iterable}
 	 * @return 第一个元素
-	 * @since 3.0.1
 	 */
 	public static <T> T getFirst(Iterable<T> iterable) {
 		if (null != iterable) {
@@ -1263,7 +1214,6 @@ public class CollectionUtil {
 	 * @param <T> 集合元素类型
 	 * @param iterator {@link Iterator}
 	 * @return 第一个元素
-	 * @since 3.0.1
 	 */
 	public static <T> T getFirst(Iterator<T> iterator) {
 		if (null != iterator && iterator.hasNext()) {
@@ -1277,7 +1227,6 @@ public class CollectionUtil {
 	 * 
 	 * @param iterable {@link Iterable}
 	 * @return 元素类型，当列表为空或元素全部为null时，返回null
-	 * @since 3.0.8
 	 */
 	public static Class<?> getElementType(Iterable<?> iterable) {
 		if (null != iterable) {
@@ -1292,7 +1241,6 @@ public class CollectionUtil {
 	 * 
 	 * @param iterator {@link Iterator}
 	 * @return 元素类型，当列表为空或元素全部为null时，返回null
-	 * @since 3.0.8
 	 */
 	public static Class<?> getElementType(Iterator<?> iterator) {
 		if (null != iterator) {
@@ -1316,7 +1264,6 @@ public class CollectionUtil {
 	 * @param map {@link Map}
 	 * @param keys 键列表
 	 * @return 值列表
-	 * @since 3.0.8
 	 */
 	@SuppressWarnings("unchecked")
 	public static <K, V> ArrayList<V> valuesOfKeys(Map<K, V> map, K... keys) {
@@ -1336,7 +1283,6 @@ public class CollectionUtil {
 	 * @param map {@link Map}
 	 * @param keys 键列表
 	 * @return 值列表
-	 * @since 3.0.9
 	 */
 	public static <K, V> ArrayList<V> valuesOfKeys(Map<K, V> map, Iterable<K> keys) {
 		return valuesOfKeys(map, keys.iterator());
@@ -1351,7 +1297,6 @@ public class CollectionUtil {
 	 * @param map {@link Map}
 	 * @param keys 键列表
 	 * @return 值列表
-	 * @since 3.0.9
 	 */
 	public static <K, V> ArrayList<V> valuesOfKeys(Map<K, V> map, Iterator<K> keys) {
 		final ArrayList<V> values = new ArrayList<>();
@@ -1464,7 +1409,6 @@ public class CollectionUtil {
 	 * @param map Map
 	 * @param comparator Entry比较器
 	 * @return {@link TreeMap}
-	 * @since 3.0.9
 	 */
 	public static <K, V> TreeMap<K, V> sort(Map<K, V> map, Comparator<? super K> comparator) {
 		TreeMap<K, V> result = new TreeMap<K, V>(comparator);
@@ -1480,7 +1424,6 @@ public class CollectionUtil {
 	 * @param entryCollection Entry集合
 	 * @param comparator {@link Comparator}
 	 * @return {@link LinkedList}
-	 * @since 3.0.9
 	 */
 	public static <K, V> LinkedHashMap<K, V> sortToMap(Collection<Map.Entry<K, V>> entryCollection, Comparator<Map.Entry<K, V>> comparator) {
 		List<Map.Entry<K, V>> list = new LinkedList<>(entryCollection);
@@ -1501,7 +1444,6 @@ public class CollectionUtil {
 	 * @param map 被排序的Map
 	 * @param comparator {@link Comparator}
 	 * @return {@link LinkedList}
-	 * @since 3.0.9
 	 */
 	public static <K, V> LinkedHashMap<K, V> sortByEntry(Map<K, V> map, Comparator<Map.Entry<K, V>> comparator){
 		return sortToMap(map.entrySet(), comparator);
