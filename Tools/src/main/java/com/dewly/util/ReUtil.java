@@ -8,7 +8,6 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.dewly.convert.Convert;
 import com.dewly.lang.PatternPool;
 import com.dewly.lang.Validator;
 
