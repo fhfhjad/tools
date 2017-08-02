@@ -17,7 +17,7 @@ import com.dewly.lang.Assert;
 /**
  * 统一资源定位符相关工具类
  * 
- * @author xiaoleilu
+ * @author Dewly
  * 
  */
 public class URLUtil {
@@ -235,7 +235,6 @@ public class URLUtil {
 	 * 
 	 * @param url {@link URL}
 	 * @return 路径
-	 * @since 3.0.8
 	 */
 	public static String getDecodedPath(URL url) {
 		String path = null;
@@ -287,7 +286,6 @@ public class URLUtil {
 	 * 
 	 * @param url {@link URL}
 	 * @return 是否为文件
-	 * @since 3.0.9
 	 */
 	public static boolean isFileURL(URL url) {
 		String protocol = url.getProtocol();
@@ -315,7 +313,6 @@ public class URLUtil {
 	 * 判断依据为file协议且扩展名为.jar
 	 * @param url the URL to check
 	 * @return whether the URL has been identified as a JAR file URL
-	 * @since 4.1
 	 */
 	public static boolean isJarFileURL(URL url) {
 		return (URL_PROTOCOL_FILE.equals(url.getProtocol()) && //
