@@ -24,8 +24,6 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import com.dewly.collection.EnumerationIterator;
-import com.dewly.collection.IteratorEnumeration;
 import com.dewly.exceptions.UtilException;
 import com.dewly.lang.BoundedPriorityQueue;
 import com.dewly.lang.Editor;
@@ -1060,31 +1058,6 @@ public class CollectionUtil {
 		return treeSet;
 	}
 
-	/**
-	 * Iterator转换为Enumeration
-	 * <p>
-	 * Adapt the specified <code>Iterator</code> to the <code>Enumeration</code> interface.
-	 * 
-	 * @param <E> 集合元素类型
-	 * @param iter {@link Iterator}
-	 * @return {@link Enumeration}
-	 */
-	public static <E> Enumeration<E> asEnumeration(Iterator<E> iter) {
-		return new IteratorEnumeration<E>(iter);
-	}
-
-	/**
-	 * Enumeration转换为Iterator
-	 * <p>
-	 * Adapt the specified <code>Enumeration</code> to the <code>Iterator</code> interface
-	 * 
-	 * @param <E> 集合元素类型
-	 * @param e {@link Enumeration}
-	 * @return {@link Iterator}
-	 */
-	public static <E> Iterator<E> asIterator(Enumeration<E> e) {
-		return new EnumerationIterator<E>(e);
-	}
 
 	/**
 	 * {@link Iterator} 转为 {@link Iterable}

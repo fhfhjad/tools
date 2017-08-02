@@ -27,7 +27,6 @@ import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 import java.util.Collection;
 
-import com.dewly.convert.Convert;
 import com.dewly.lang.Assert;
 import com.dewly.util.CharsetUtil;
 import com.dewly.util.HexUtil;
