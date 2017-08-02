@@ -6,14 +6,14 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * 基本变量类型的枚举<br>
  * 基本类型枚举包括原始类型和包装类型
- * @author xiaoleilu
+ * @author sunlulu
  */
 public enum BasicType {
 	BYTE, SHORT, INT, INTEGER, LONG, DOUBLE, FLOAT, BOOLEAN, CHAR, CHARACTER, STRING;
 	
-	/** 包装类型为Key，原始类型为Value，例如： Integer.class =》 int.class. */
+	/** 包装类型为Key，原始类型为Value，例如： Integer.class -> int.class. */
 	public static final Map<Class<?>, Class<?>> wrapperPrimitiveMap = new ConcurrentHashMap<>(8);
-	/** 原始类型为Key，包装类型为Value，例如： int.class =》 Integer.class. */
+	/** 原始类型为Key，包装类型为Value，例如： int.class -> Integer.class. */
 	public static final Map<Class<?>, Class<?>> primitiveWrapperMap = new ConcurrentHashMap<>(8);
 	
 	static {

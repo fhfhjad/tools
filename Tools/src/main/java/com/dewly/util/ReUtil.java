@@ -9,7 +9,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.dewly.convert.Convert;
-import com.dewly.lang.Holder;
 import com.dewly.lang.PatternPool;
 import com.dewly.lang.Validator;
 
@@ -124,62 +123,7 @@ public class ReUtil {
 		return extractMulti(pattern, content, template);
 	}
 	
-	/**
-	 * 从content中匹配出多个值并根据template生成新的字符串<br>
-	 * 匹配结束后会删除匹配内容之前的内容（包括匹配内容）<br>
-	 * 例如：<br>
-	 * 		content		2013年5月
-	 * 		pattern			(.*?)年(.*?)月
-	 * 		template：	$1-$2
-	 * 		return 			2013-5
-	 * 
-	 * @param pattern 匹配正则
-	 * @param contentHolder 被匹配的内容的Holder，value为内容正文，经过这个方法的原文将被去掉匹配之前的内容
-	 * @param template 生成内容模板，变量 $1 表示group1的内容，以此类推
-	 * @return 新字符串
-	 */
-	public static String extractMultiAndDelPre(Pattern pattern, Holder<String> contentHolder, String template) {
-		if(null == contentHolder || null == pattern || null == template){
-			return null;
-		}
-		
-		HashSet<String> varNums = findAll(PatternPool.GROUP_VAR, template, 1, new HashSet<String>());
-		
-		final String content = contentHolder.get();
-		Matcher matcher = pattern.matcher(content);
-		if (matcher.find()) {
-			for (String var : varNums) {
-				int group = Integer.parseInt(var);
-				template = template.replace("$" + var, matcher.group(group));
-			}
-			contentHolder.set(StrUtil.sub(content, matcher.end(), content.length()));
-			return template;
-		}
-		return null;
-	}
 	
-	/**
-	 * 从content中匹配出多个值并根据template生成新的字符串<br>
-	 * 例如：<br>
-	 * 		content		2013年5月
-	 * 		pattern			(.*?)年(.*?)月
-	 * 		template：	$1-$2
-	 * 		return 			2013-5
-	 * 
-	 * @param regex 匹配正则字符串
-	 * @param contentHolder 被匹配的内容的Holder，value为内容正文，经过这个方法的原文将被去掉匹配之前的内容
-	 * @param template 生成内容模板，变量 $1 表示group1的内容，以此类推
-	 * @return 按照template拼接后的字符串
-	 */
-	public static String extractMultiAndDelPre(String regex, Holder<String> contentHolder, String template) {
-		if(null == contentHolder || null == regex || null == template){
-			return null;
-		}
-		
-//		Pattern pattern = Pattern.compile(regex, Pattern.DOTALL);
-		final Pattern pattern = PatternPool.get(regex, Pattern.DOTALL);
-		return extractMultiAndDelPre(pattern, contentHolder, template);
-	}
 
 	/**
 	 * 删除匹配的第一个内容
