@@ -11,7 +11,7 @@ import com.dewly.util.CollectionUtil;
 
 /**
  * ClassPath资源工具类
- * @author Looly
+ * @author Dewly
  *
  */
 public class ResourceUtil {
@@ -24,7 +24,7 @@ public class ResourceUtil {
 	 * </pre>
 	 * 
 	 * @param resource 资源（相对Classpath的路径）
-	 * @return 资源URL
+	 * @return {@link URL}资源URL
 	 */
 	public static URL getResource(String resource) throws IORuntimeException{
 		return getResource(resource, null);
