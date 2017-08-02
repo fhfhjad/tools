@@ -5,7 +5,7 @@ import com.dewly.util.StrUtil;
 
 /**
  * 转换异常
- * @author xiaoleilu
+ * @author sunlulu
  */
 public class ConvertException extends RuntimeException{
 	private static final long serialVersionUID = 4730597402855274362L;

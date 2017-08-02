@@ -324,7 +324,7 @@ public class ReUtil {
 	 * @return 整数
 	 */
 	public static Integer getFirstNumber(String StringWithNumber) {
-		return Convert.toInt(get(PatternPool.NUMBERS, StringWithNumber, 0), null);
+		return Integer.parseInt(get(PatternPool.NUMBERS, StringWithNumber, 0));
 	}
 	
 	/**

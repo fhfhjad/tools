@@ -2,7 +2,7 @@ package com.dewly.lang;
 
 /**
  * 过滤器接口
- * @author Looly
+ * @author sunlulu
  *
  */
 public interface Filter<T> {

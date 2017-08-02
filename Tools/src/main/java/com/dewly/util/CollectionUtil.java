@@ -28,7 +28,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import com.dewly.collection.EnumerationIterator;
 import com.dewly.collection.IteratorEnumeration;
 import com.dewly.convert.Convert;
-import com.dewly.convert.ConverterRegistry;
 import com.dewly.exceptions.UtilException;
 import com.dewly.lang.BoundedPriorityQueue;
 import com.dewly.lang.Editor;
@@ -67,7 +66,7 @@ public class CollectionUtil {
 			final Map<T, Integer> map2 = countMap(coll2);
 			final Set<T> elts = newHashSet(coll2);
 			for (T t : elts) {
-				for (int i = 0, m = Math.max(Convert.toInt(map1.get(t), 0), Convert.toInt(map2.get(t), 0)); i < m; i++) {
+				for (int i = 0, m = Math.max(Integer.parseInt(map1.get(t).toString()), Integer.parseInt(map2.get(t).toString())); i < m; i++) {
 					list.add(t);
 				}
 			}
@@ -114,7 +113,7 @@ public class CollectionUtil {
 			final Map<T, Integer> map2 = countMap(coll2);
 			final Set<T> elts = newHashSet(coll2);
 			for (T t : elts) {
-				for (int i = 0, m = Math.min(Convert.toInt(map1.get(t), 0), Convert.toInt(map2.get(t), 0)); i < m; i++) {
+				for (int i = 0, m = Math.min(Integer.parseInt(map1.get(t).toString()), Integer.parseInt(map2.get(t).toString())); i < m; i++) {
 					list.add(t);
 				}
 			}
@@ -167,7 +166,7 @@ public class CollectionUtil {
 			final Map<T, Integer> map2 = countMap(coll2);
 			final Set<T> elts = newHashSet(coll2);
 			for (T t : elts) {
-				for (int i = 0, m = Math.max(Convert.toInt(map1.get(t), 0), Convert.toInt(map2.get(t), 0)) - Math.min(Convert.toInt(map1.get(t), 0), Convert.toInt(map2.get(t), 0)); i < m; i++) {
+				for (int i = 0, m = Math.max(Integer.parseInt(map1.get(t).toString()), Integer.parseInt(map2.get(t).toString())) - Math.min(Integer.parseInt(map1.get(t).toString()), Integer.parseInt(map2.get(t).toString())); i < m; i++) {
 					list.add(t);
 				}
 			}
@@ -1136,9 +1135,9 @@ public class CollectionUtil {
 	 * @param value 对象，可能为Iterator、Iterable、Enumeration、Array
 	 * @return 被加入集合
 	 */
-	public static <T> Collection<T> addAll(Collection<T> collection, Object value) {
-		return addAll(collection, value, ClassUtil.getTypeArgument(collection.getClass()));
-	}
+//	public static <T> Collection<T> addAll(Collection<T> collection, Object value) {
+//		return addAll(collection, value, ClassUtil.getTypeArgument(collection.getClass()));
+//	}
 
 	/**
 	 * 将指定对象全部加入到集合中<br>
@@ -1150,44 +1149,17 @@ public class CollectionUtil {
 	 * @param elementType 元素类型，为空时，使用Object类型来接纳所有类型
 	 * @return 被加入集合
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public static <T> Collection<T> addAll(Collection<T> collection, Object value, Class<?> elementType) {
-		if (null == collection || null == value) {
-			return collection;
-		}
-		if (null == elementType) {// 元素类型为空时，使用Object类型来接纳所有类型
-			elementType = Object.class;
-		}
-
-		final ConverterRegistry convert = ConverterRegistry.getInstance();
-		if (elementType.isInstance(value)) {
-			collection.add((T) value);
-		} else if (value instanceof Iterator) {
-			final Iterator iter = (Iterator) value;
-			while (iter.hasNext()) {
-				collection.add((T) convert.convert(elementType, iter.next()));
-			}
-			addAll(collection, (Iterator<T>) value);
-		} else if (value instanceof Iterable) {
-			final Iterator iter = ((Iterable) value).iterator();
-			while (iter.hasNext()) {
-				collection.add((T) convert.convert(elementType, iter.next()));
-			}
-		} else if (value instanceof Enumeration) {
-			final Enumeration enumeration = ((Enumeration) value);
-			while (enumeration.hasMoreElements()) {
-				collection.add((T) convert.convert(elementType, enumeration.nextElement()));
-			}
-		} else if (ArrayUtil.isArray(value)) {
-			final int length = Array.getLength(value);
-			Object item;
-			for (int i = 0; i < length; i++) {
-				item = Array.get(value, i);
-				collection.add((T) convert.convert(elementType, item));
-			}
-		}
-		return collection;
-	}
+//	@SuppressWarnings({ "unchecked", "rawtypes" })
+//	public static <T> Collection<T> addAll(Collection<T> collection, Object value, Class<?> elementType) {
+//		if (null == collection || null == value) {
+//			return collection;
+//		}
+//		if (null == elementType) {// 元素类型为空时，使用Object类型来接纳所有类型
+//			elementType = Object.class;
+//		}
+//
+//		return collection;
+//	}
 
 	/**
 	 * 加入全部
