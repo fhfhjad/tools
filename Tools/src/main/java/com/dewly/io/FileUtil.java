@@ -46,7 +46,7 @@ import com.dewly.util.URLUtil;
 /**
  * 文件工具类
  * 
- * @author xiaoleilu
+ * @author Dewly
  *
  */
 public final class FileUtil {
@@ -72,7 +72,6 @@ public final class FileUtil {
 	 * 是否为Windows环境
 	 * 
 	 * @return 是否为Windows环境
-	 * @since 3.0.9
 	 */
 	public static boolean isWindows() {
 		return '\\' == File.separatorChar;

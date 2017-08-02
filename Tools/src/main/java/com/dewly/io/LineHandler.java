@@ -2,7 +2,7 @@ package com.dewly.io;
 
 /**
  * 行处理器
- * @author Looly
+ * @author Dewly
  *
  */
 public interface LineHandler {
