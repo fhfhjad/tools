@@ -17,8 +17,7 @@ import com.dewly.lang.SimpleCache;
 /**
  * 反射工具类
  * 
- * @author Looly
- * @since 3.0.9
+ * @author Dewly
  */
 public class ReflectUtil {
 
@@ -56,11 +55,11 @@ public class ReflectUtil {
 	}
 
 	/**
-	 * 获得一个类中所有字段列表
+	 * 获得一个类中所有构造对象列表
 	 * 
 	 * @param <T> 构造的对象类型
 	 * @param beanClass 类
-	 * @return 字段列表
+	 * @return 构造对象列表
 	 * @throws SecurityException 安全检查异常
 	 */
 	@SuppressWarnings("unchecked")
@@ -76,10 +75,10 @@ public class ReflectUtil {
 	}
 
 	/**
-	 * 获得一个类中所有字段列表，直接反射获取，无缓存
+	 * 获得一个类中所有构造对象列表，直接反射获取，无缓存
 	 * 
 	 * @param beanClass 类
-	 * @return 字段列表
+	 * @return 构造对象列表
 	 * @throws SecurityException 安全检查异常
 	 */
 	public static Constructor<?>[] getConstructorsDirectly(Class<?> beanClass) throws SecurityException {
@@ -219,7 +218,7 @@ public class ReflectUtil {
 		}
 	}
 
-	// --------------------------------------------------------------------------------------------------------- method
+	// --------------------------------------------------------------------------------------------------------- Method
 	/**
 	 * 查找指定对象中的所有方法（包括非public方法），也包括父对象和Object类的方法
 	 * 
