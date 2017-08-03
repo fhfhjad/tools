@@ -14,8 +14,7 @@ import com.dewly.lang.SimpleCache;
 /**
  * {@link ClassLoader}工具类
  * 
- * @author Looly
- * @since 3.0.9
+ * @author Dewly
  */
 public class ClassLoaderUtil {
 
@@ -30,7 +29,7 @@ public class ClassLoaderUtil {
 	/** 内部类分界符: '$' */
 	private static final char INNER_CLASS_SEPARATOR = '$';
 
-	/** 原始类型名和其class对应表，例如：int =》 int.class */
+	/** 原始类型名和其class对应表，例如：int -> int.class */
 	private static final Map<String, Class<?>> primitiveTypeNameMap = new ConcurrentHashMap<String, Class<?>>(32);
 	private static SimpleCache<String, Class<?>> classCache = new SimpleCache<>();
 
