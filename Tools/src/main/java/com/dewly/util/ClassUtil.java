@@ -25,7 +25,11 @@ import com.dewly.io.resource.ResourceUtil;
 import com.dewly.lang.ClassScaner;
 import com.dewly.lang.Filter;
 import com.dewly.lang.Singleton;
-
+/**
+ * class工具类
+ * 
+ * @author Dewly
+ */
 public class ClassUtil {
 
 	private ClassUtil() {
@@ -49,7 +53,6 @@ public class ClassUtil {
 	 * @param obj 获取类名对象
 	 * @param isSimple 是否简单类名，如果为true，返回不带包名的类名
 	 * @return 类名
-	 * @since 3.0.7
 	 */
 	public static String getClassName(Object obj, boolean isSimple) {
 		if (null == obj) {
@@ -65,14 +68,13 @@ public class ClassUtil {
 	 * 例如：ClassUtil这个类<br>
 	 * 
 	 * <pre>
-	 * isSimple为false: "com.xiaoleilu.hutool.util.ClassUtil"
+	 * isSimple为false: "com.**.ClassUtil"
 	 * isSimple为true: "ClassUtil"
 	 * </pre>
 	 * 
 	 * @param clazz 类
 	 * @param isSimple 是否简单类名，如果为true，返回不带包名的类名
 	 * @return 类名
-	 * @since 3.0.7
 	 */
 	public static String getClassName(Class<?> clazz, boolean isSimple) {
 		if (null == clazz) {
@@ -104,7 +106,6 @@ public class ClassUtil {
 	 * @param className 类名，可以是全类名（包含包名），也可以是简单类名（不包含包名）
 	 * @param ignoreCase 是否忽略大小写
 	 * @return 指定类是否与给定的类名相同
-	 * @since 3.0.7
 	 */
 	public static boolean equals(Class<?> clazz, String className, boolean ignoreCase) {
 		if (null == clazz || StrUtil.isBlank(className)) {
@@ -185,7 +186,7 @@ public class ClassUtil {
 	 * @return 方法名Set
 	 */
 	public static Set<String> getPublicMethodNames(Class<?> clazz) {
-		HashSet<String> methodSet = new HashSet<String>();
+		Set<String> methodSet = new HashSet<String>();
 		Method[] methodArray = getPublicMethods(clazz);
 		for (Method method : methodArray) {
 			String methodName = method.getName();
@@ -1008,7 +1009,7 @@ public class ClassUtil {
 	/**
 	 * 获得给定类所在包的名称<br>
 	 * 例如：<br>
-	 * com.xiaoleilu.hutool.util.ClassUtil =》 com.xiaoleilu.hutool.util
+	 * com.**.util.ClassUtil =》 com.**.util
 	 * 
 	 * @param clazz 类
 	 * @return 包名
@@ -1028,7 +1029,7 @@ public class ClassUtil {
 	/**
 	 * 获得给定类所在包的路径<br>
 	 * 例如：<br>
-	 * com.xiaoleilu.hutool.util.ClassUtil =》 com/xiaoleilu/hutool/util
+	 * com.**.util.ClassUtil =》 com/\**\/util
 	 * 
 	 * @param clazz 类
 	 * @return 包名
@@ -1047,7 +1048,6 @@ public class ClassUtil {
 	 * 
 	 * @param clazz 类
 	 * @return 默认值
-	 * @since 3.0.8
 	 */
 	public static Object getDefaultValue(Class<?> clazz) {
 		if(clazz.isPrimitive()) {
@@ -1077,7 +1077,6 @@ public class ClassUtil {
 	 * 获得默认值列表
 	 * @param classes 值类型
 	 * @return 默认值列表
-	 * @since 3.0.9
 	 */
 	public static Object[] getDefaultValues(Class<?>... classes) {
 		final Object[] values = new Object[classes.length];

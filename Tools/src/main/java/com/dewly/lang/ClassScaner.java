@@ -18,7 +18,7 @@ import com.dewly.util.URLUtil;
 
 /**
  * 类扫描器
- * @author Looly
+ * @author Dewly
  *
  */
 public final class ClassScaner {
