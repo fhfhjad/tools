@@ -15,7 +15,7 @@ import com.dewly.lang.Validator;
  * 正则相关工具类<br>
  * 常用正则请见 {@link Validator}
  * 
- * @author xiaoleilu
+ * @author Dewly
  */
 public class ReUtil {
 	
